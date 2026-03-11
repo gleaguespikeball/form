@@ -255,13 +255,21 @@
     function updateAverage(index) {
       const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game Sense", "Hustle"];
       let total = 0;
+      
       categories.forEach(category => {
         const id = `classmate${index}_${category.replace(/\s+/g, '')}_num`;
         total += parseInt(document.getElementById(id).value) || 0;
       });
+      
       const avg = Math.ceil(total / categories.length);
-      document.getElementById(`classmate${index}_Average_slider`).value = avg;
-      document.getElementById(`classmate${index}_Average_num`).value = avg;
+
+      const avgSlider = document.getElementById(`classmate${index}_Average_slider`);
+      const avgNum = document.getElementById(`classmate${index}_Average_num`);
+
+      avgSlider.value = avg;
+      avgNum.value = avg;
+
+      updateSliderFill(avgSlider);
     }
 
     function updateSliderFill(slider) {
@@ -280,6 +288,7 @@
   </script>
 </body>
 </html>
+
 
 
 
