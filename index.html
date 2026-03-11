@@ -75,12 +75,12 @@
     font-size: 18px;
     }
     input[type="range"] {
-      width: 100%;
-      margin-right: 10px;
-      -webkit-appearance: none;
-      background: #FFD700;
-      height: 10px;
-      border-radius: 5px;
+    width: 100%;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #FFD700 0%, #FFD700 50%, white 50%, white 100%);
+    height: 10px;
+    border-radius: 5px;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -90,7 +90,7 @@
       border: 2px solid white;
       border-radius: 50%;
       cursor: pointer;
-      transform: translateY(2px);
+      transform: translateY(4px);
     }
     input[type="range"]::-moz-range-thumb {
       width: 18px;
@@ -107,6 +107,8 @@
       border: 1px solid #FFD700;
       border-radius: 5px;
       padding: 8px;
+      width: 60px;
+      font-family: 'Sour Gummy', san-serif;
     }
     input[type="text"]:focus, input[type="number"]:focus {
       background-color: black;
@@ -120,9 +122,6 @@
     }
     .average-bar input[type="range"] {
       background: #e6c200;
-    }
-    .average-bar input[type="number"] {
-      width: 60px;
     }
     button {
       padding: 10px 20px;
@@ -192,6 +191,7 @@
               oninput="
                 document.getElementById('${id}_num').value = this.value;
                 updateAverage(${index});
+                updateSliderFill(this);
               "
             >
             <input 
@@ -248,9 +248,16 @@
       document.getElementById(`classmate${index}_Average_slider`).value = avg;
       document.getElementById(`classmate${index}_Average_num`).value = avg;
     }
+
+    function updateSliderFill(slider) {
+      const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background =
+        `linear-gradient(to right, #FFD700 ${percent}%, white ${percent}%)`;
+    }
   </script>
 </body>
 </html>
+
 
 
 
