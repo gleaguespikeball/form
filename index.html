@@ -265,7 +265,7 @@
     }
 
     function updateSliderFill(slider) {
-      const percent = (slider.value / slider.max) * 100;
+      const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
       slider.style.background = "linear-gradient(to right, #FFD700 " + percent + "%, white " + percent + "%)";
     }
     document.querySelectorAll('input[type="range"]').forEach(slider => {
@@ -280,6 +280,7 @@
   </script>
 </body>
 </html>
+
 
 
 
