@@ -157,7 +157,7 @@
       "Cody", "Marco", "Mario", "Justin", "Cesar", "Ozan"
     ];
 
-    const categories = ["Power", "Shooting Accuracy", "Passing", "Defense", "Game Sense", "Hustle"];
+    const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game IQ", "Hustle"];
 
     const formContent = document.getElementById("formContent");
 
@@ -229,7 +229,7 @@
     });
 
     function updateAverage(index) {
-      const categories = ["Power", "Shooting Accuracy", "Passing", "Defense", "Game Sense", "Hustle"];
+      const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game Sense", "Hustle"];
       let total = 0;
       categories.forEach(category => {
         const id = `classmate${index}_${category.replace(/\s+/g, '')}_num`;
@@ -242,3 +242,4 @@
   </script>
 </body>
 </html>
+
