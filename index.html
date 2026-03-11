@@ -217,9 +217,10 @@
               oninput="
                 if (this.value > 99) this.value = 99;
                 if (this.value < 50) this.value = 50;
-                document.getElementById('${id}_slider').value = this.value;
+                const slider = document.getElementById('${id}_slider');
+                slider.value = this.value;
                 updateAverage(${index});
-                updateSliderFill(document.getElementByID('${id}_slider'));
+                updateSliderFill(slider);
               "
             >
           </div>
@@ -265,12 +266,12 @@
 
     function updateSliderFill(slider) {
       const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-      slider.style.background =
-        `linear-gradient(to right, #FFD700 ${percent}%)`;
+      slider.style.background = `linear-gradient(to right, #FFD700 ${percent}%, white ${percent}%)`;
     }
   </script>
 </body>
 </html>
+
 
 
 
