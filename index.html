@@ -53,7 +53,7 @@
     h1 {
     font-family: 'Changa One', sans-serif;
     font-size: 64px;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     color: #FFD700;
     letter-spacing: 2px;
     text-shadow: 0 0 12px rgba(255,215,0,0.6);
@@ -253,11 +253,12 @@
     function updateSliderFill(slider) {
       const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
       slider.style.background =
-        `linear-gradient(to right, #FFD700 ${percent}%, white ${percent}%)`;
+        `linear-gradient(to right, #FFD700 ${percent}%)`;
     }
   </script>
 </body>
 </html>
+
 
 
 
