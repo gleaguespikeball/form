@@ -160,7 +160,7 @@
 
   <h1>G League Evaluation Form</h1>
 
-  <form id="feedbackForm" action="https://getform.io/f/bwnqpwma" method="POST">
+  <form id="feedbackForm" 
     <div class="category">
       <label for="submitter">Your Name</label>
       <input type="text" id="submitter" name="submitter" required />
@@ -289,9 +289,59 @@
       });
 
     });
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
+
+    document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const submitter = document.getElementById("submitter").value;
+
+    let players = [];
+
+    classmates.forEach((name, index) => {
+
+      const power = document.querySelector(`[name="${name}_Power"]`).value;
+      const accuracy = document.querySelector(`[name="${name}_Hitting Accuracy"]`).value;
+      const setting = document.querySelector(`[name="${name}_Setting"]`).value;
+      const defense = document.querySelector(`[name="${name}_Defense"]`).value;
+      const iq = document.querySelector(`[name="${name}_Game IQ"]`).value;
+      const hustle = document.querySelector(`[name="${name}_Hustle"]`).value;
+
+      const overall = document.getElementById(`classmate${index}_Average_num`).value;
+
+      players.push({
+        name,
+        power,
+        accuracy,
+        setting,
+        defense,
+        iq,
+        hustle,
+        overall
+      });
+
+    });
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify({
+        submitter,
+        players
+      })
+    })
+    .then(() => {
+      alert("Evaluation submitted!");
+      document.getElementById("feedbackForm").reset();
+    })
+    .catch(() => alert("Submission failed"));
+
+  });
   </script>
 </body>
 </html>
+
 
 
 
