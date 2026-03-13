@@ -313,41 +313,25 @@
   // LOCK PLAYER STATS BASED ON SUBMITTER
 
   document.getElementById("submitter").addEventListener("input", function () {
-
     const name = this.value.trim().toLowerCase();
 
     document.querySelectorAll(".classmate").forEach(card => {
-
       const player = card.dataset.player.toLowerCase();
 
       // If submitter is the player themselves, disable their own stats
       if (player === name) {
         card.style.opacity = "0.4";
-        card.querySelectorAll("input").forEach(input => {
-          input.disabled = true;
-        });
+        card.querySelectorAll("input").forEach(input => input.disabled = true);
 
+      // If Dylan is the submitter, allow editing Jeremy & Kevin
       } else if (name === "dylan" && (player === "jeremy" || player === "kevin")) {
-        // Dylan can edit Jeremy and Kevin
         card.style.opacity = "1";
-        card.querySelectorAll("input").forEach(input => {
-          input.disabled = false;
-        });
+        card.querySelectorAll("input").forEach(input => input.disabled = false);
 
-        // Everyone else uneditable
-      } else if (player === "jeremy" || player === "kevin") {
-        card.style.opacity = "0.4"; // fully blacked out
-        card.querySelectorAll("input").forEach(input => {
-          input.disabled = true;
-        });
-
+      // For everyone else, block stats  
       } else {
-        card.style.opacity = "1"; // normal visible
-        card.querySelectorAll("input").forEach(input => {
-          if (!input.closest(".average-bar")) {
-            input.disabled = true;
-          }
-        });
+        card.style.opacity = "0.4";
+        card.querySelectorAll("input").forEach(input => input.disabled = true);
       }
     });
   });
