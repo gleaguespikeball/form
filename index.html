@@ -355,18 +355,18 @@
   const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
 
   document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-
     e.preventDefault();
 
     const submitter = document.getElementById("submitter").value;
-
     let players = [];
 
     classmates.forEach((name, index) => {
 
-      if (name.toLowerCase() === submitter.toLowerCase()) {
-        return;
-      }
+      const lname = name.toLowerCase();
+
+      // Skip your own stats AND skip Jeremy & Kevin unless you're Dylan
+      if (lname === submitter) return;
+      if (submitter !== "dylan" && (lname === "jeremy" || lname === "kevin")) return;
 
       const power = document.querySelector(`[name="${name}_Power"]`).value;
       const accuracy = document.querySelector(`[name="${name}_Hitting Accuracy"]`).value;
@@ -374,7 +374,6 @@
       const defense = document.querySelector(`[name="${name}_Defense"]`).value;
       const iq = document.querySelector(`[name="${name}_Game IQ"]`).value;
       const hustle = document.querySelector(`[name="${name}_Hustle"]`).value;
-
       const overall = document.getElementById(`classmate${index}_Average_num`).value;
 
       players.push({
