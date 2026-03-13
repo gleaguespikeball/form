@@ -332,8 +332,7 @@
       })
     })
     .then(() => {
-      alert("Evaluation submitted!");
-      document.getElementById("feedbackForm").reset();
+      window.location.href = "thankyou.html";
     })
     .catch(() => alert("Submission failed"));
 
