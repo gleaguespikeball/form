@@ -179,7 +179,7 @@
   const classmates = [
     "Dylan", "Kai", "Virup", "Anish", "Evan", "Aarav",
     "Sean", "Andres", "Francisco", "Brandon", "Nikita", "Saul",
-    "Cody", "Marco", "Mario", "Justin", "Cesar", "Ozan"
+    "Jeremy", "Kevin", "Mario", "Justin", "Cesar", "Ozan"
   ];
 
   const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game IQ", "Hustle"];
@@ -310,7 +310,7 @@
   });
 
 
-  // LOCK YOUR OWN PLAYER SECTION
+  // LOCK PLAYER STATS BASED ON SUBMITTER
 
   document.getElementById("submitter").addEventListener("input", function () {
 
@@ -320,26 +320,28 @@
 
       const player = card.dataset.player.toLowerCase();
 
+      // If submitter is the player themselves, disable their own stats
       if (player === name) {
-
         card.style.opacity = "0.4";
-
         card.querySelectorAll("input").forEach(input => {
           input.disabled = true;
         });
 
-      } else {
-
+      } else if (name === "dylan" && (player === "jeremy" || player === "kevin")) {
+        // Dylan can edit Jeremy and Kevin
         card.style.opacity = "1";
-
         card.querySelectorAll("input").forEach(input => {
-
-          if (!input.closest(".average-bar")) {
-            input.disabled = false;
-          }
-
+          input.disabled = false;
         });
 
+      } else {
+        // everyone else uneditable
+        card.style.opacity = "1";
+        card.querySelectorAll("input").forEach(input => {
+          if (!input.closest(".average-bar")) {
+            input.disabled = true;
+          }
+        });
       }
 
     });
@@ -347,7 +349,6 @@
   });
 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
-
 
   document.getElementById("feedbackForm").addEventListener("submit", function(e) {
 
