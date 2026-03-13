@@ -172,97 +172,107 @@
   </form>
 
   <script>
-    const classmates = [
-      "Dylan", "Kai", "Virup", "Anish", "Evan", "Aarav",
-      "Sean", "Andres", "Francisco", "Brandon", "Nikita", "Saul",
-      "Cody", "Marco", "Mario", "Justin", "Cesar", "Ozan"
-    ];
 
-    const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game IQ", "Hustle"];
+  const classmates = [
+    "Dylan", "Kai", "Virup", "Anish", "Evan", "Aarav",
+    "Sean", "Andres", "Francisco", "Brandon", "Nikita", "Saul",
+    "Cody", "Marco", "Mario", "Justin", "Cesar", "Ozan"
+  ];
 
-    const formContent = document.getElementById("formContent");
+  const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game IQ", "Hustle"];
 
-    classmates.forEach((name, index) => {
-      const div = document.createElement("div");
-      div.className = "classmate";
-      div.innerHTML = `<h2>${name}</h2>`;
+  const formContent = document.getElementById("formContent");
 
-      let sliders = [];
+  classmates.forEach((name, index) => {
 
-      categories.forEach(category => {
-        const id = `classmate${index}_${category.replace(/\s+/g, '')}`;
-        sliders.push(id);
-        div.innerHTML += `
-          <div class="category">
-            <label for="${id}">${category}</label>
-            <input 
-              type="range" 
-              id="${id}_slider" 
-              min="50" 
-              max="99" 
-              value="50"
-              oninput="
-                document.getElementById('${id}_num').value = this.value;
-                updateAverage(${index});
-                updateSliderFill(this);
-              "
-            >
-            <input 
-              type="number" 
-              id="${id}_num" 
-              name="${name}_${category}" 
-              min="50" 
-              max="99" 
-              value="50"
-              oninput="
-                if (this.value > 99) this.value = 99;
-                if (this.value < 50) this.value = 50;
-                const slider = document.getElementById('${id}_slider');
-                slider.value = this.value;
-                updateAverage(${index});
-                updateSliderFill(slider);
-              "
-            >
-          </div>
-        `;
-      });
+    const div = document.createElement("div");
+    div.className = "classmate";
+    div.setAttribute("data-player", name);
 
-      // Add average display
-      const avgId = `classmate${index}_Average`;
+    div.innerHTML = `<h2>${name}</h2>`;
+
+    categories.forEach(category => {
+
+      const id = `classmate${index}_${category.replace(/\s+/g, '')}`;
+
       div.innerHTML += `
-        <div class="category average-bar">
-          <label for="${avgId}_slider">Overall</label>
-          <input 
-            type="range" 
-            id="${avgId}_slider" 
-            value="50" 
-            min="50" 
+        <div class="category">
+          <label for="${id}">${category}</label>
+
+          <input
+            type="range"
+            id="${id}_slider"
+            min="50"
             max="99"
-            disabled
-          >
-          <input 
-            type="number" 
-            id="${avgId}_num" 
             value="50"
-            disabled
+            oninput="
+              document.getElementById('${id}_num').value = this.value;
+              updateAverage(${index});
+              updateSliderFill(this);
+            "
+          >
+
+          <input
+            type="number"
+            id="${id}_num"
+            name="${name}_${category}"
+            min="50"
+            max="99"
+            value="50"
+            oninput="
+              if (this.value > 99) this.value = 99;
+              if (this.value < 50) this.value = 50;
+              const slider = document.getElementById('${id}_slider');
+              slider.value = this.value;
+              updateAverage(${index});
+              updateSliderFill(slider);
+            "
           >
         </div>
       `;
-
-      formContent.appendChild(div);
     });
 
-    function updateAverage(index) {
+    const avgId = `classmate${index}_Average`;
+
+    div.innerHTML += `
+      <div class="category average-bar">
+        <label for="${avgId}_slider">Overall</label>
+
+        <input
+          type="range"
+          id="${avgId}_slider"
+          value="50"
+          min="50"
+          max="99"
+          disabled
+        >
+
+        <input
+          type="number"
+          id="${avgId}_num"
+          value="50"
+          disabled
+        >
+      </div>
+    `;
+
+    formContent.appendChild(div);
+
+  });
+
+  function updateAverage(index) {
 
     let total = 0;
 
     categories.forEach(category => {
+
       const id = `classmate${index}_${category.replace(/\s+/g, '')}_num`;
       const input = document.getElementById(id);
 
       if (input) {
         total += parseInt(input.value);
       }
+
     });
 
     const avg = Math.ceil(total / categories.length);
@@ -274,25 +284,69 @@
     avgNum.value = avg;
 
     updateSliderFill(avgSlider);
-    }
 
-    function updateSliderFill(slider) {
-      const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-      slider.style.background = "linear-gradient(to right, #FFD700 " + percent + "%, white " + percent + "%)";
-    }
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
+  }
 
-      updateSliderFill(slider); // sets starting color
+  function updateSliderFill(slider) {
 
-      slider.addEventListener("input", () => {
-        updateSliderFill(slider);
-      });
+    const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+
+    slider.style.background =
+      "linear-gradient(to right, #FFD700 " + percent + "%, white " + percent + "%)";
+
+  }
+
+  document.querySelectorAll('input[type="range"]').forEach(slider => {
+
+    updateSliderFill(slider);
+
+    slider.addEventListener("input", () => {
+      updateSliderFill(slider);
+    });
+
+  });
+
+
+  // LOCK YOUR OWN PLAYER SECTION
+
+  document.getElementById("submitter").addEventListener("input", function () {
+
+    const name = this.value.trim().toLowerCase();
+
+    document.querySelectorAll(".classmate").forEach(card => {
+
+      const player = card.dataset.player.toLowerCase();
+
+      if (player === name) {
+
+        card.style.opacity = "0.4";
+
+        card.querySelectorAll("input").forEach(input => {
+          input.disabled = true;
+        });
+
+      } else {
+
+        card.style.opacity = "1";
+
+        card.querySelectorAll("input").forEach(input => {
+
+          if (!input.closest(".average-bar")) {
+            input.disabled = false;
+          }
+
+        });
+
+      }
 
     });
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
+  });
 
-    document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
+
+
+  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
 
     e.preventDefault();
 
@@ -301,6 +355,10 @@
     let players = [];
 
     classmates.forEach((name, index) => {
+
+      if (name.toLowerCase() === submitter.toLowerCase()) {
+        return;
+      }
 
       const power = document.querySelector(`[name="${name}_Power"]`).value;
       const accuracy = document.querySelector(`[name="${name}_Hitting Accuracy"]`).value;
@@ -326,34 +384,19 @@
 
     document.querySelector("button[type='submit']").disabled = true;
     document.querySelector("button[type='submit']").innerText = "Submitting...";
-      
+
     fetch(scriptURL, {
       method: "POST",
       body: JSON.stringify({
         submitter,
         players
       })
-    })
+    });
+
     window.location.href = "thankyou.html";
 
   });
+
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
