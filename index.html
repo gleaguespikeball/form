@@ -334,18 +334,22 @@
           input.disabled = false;
         });
 
+        // Everyone else uneditable
+      } else if (player === "jeremy" || player === "kevin") {
+        card.style.opacity = "0.4"; // fully blacked out
+        card.querySelectorAll("input").forEach(input => {
+          input.disabled = true;
+        });
+
       } else {
-        // everyone else uneditable
-        card.style.opacity = "1";
+        card.style.opacity = "1"; // normal visible
         card.querySelectorAll("input").forEach(input => {
           if (!input.closest(".average-bar")) {
             input.disabled = true;
           }
         });
       }
-
     });
-
   });
 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
