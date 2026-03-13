@@ -318,20 +318,25 @@
     document.querySelectorAll(".classmate").forEach(card => {
       const player = card.dataset.player.toLowerCase();
 
-      // If submitter is the player themselves, disable their own stats
       if (player === name) {
+        // Always block your own stats
         card.style.opacity = "0.4";
         card.querySelectorAll("input").forEach(input => input.disabled = true);
 
-      // If Dylan is the submitter, allow editing Jeremy & Kevin
-      } else if (name === "dylan" && (player === "jeremy" || player === "kevin")) {
+      } else if (name === "dylan") {
+        // Dylan can edit everyone else (including Jeremy & Kevin)
         card.style.opacity = "1";
         card.querySelectorAll("input").forEach(input => input.disabled = false);
 
-      // For everyone else, block stats  
-      } else {
+      } else if (player === "jeremy" || player === "kevin") {
+        // Anyone other than Dylan cannot edit Jeremy/Kevin
         card.style.opacity = "0.4";
         card.querySelectorAll("input").forEach(input => input.disabled = true);
+
+      } else {
+        // Everyone else (not submitter, not Jeremy/Kevin) is editable
+        card.style.opacity = "1";
+        card.querySelectorAll("input").forEach(input => input.disabled = false);
       }
     });
   });
