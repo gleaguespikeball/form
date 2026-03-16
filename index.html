@@ -312,45 +312,39 @@
 
   // LOCK PLAYER STATS BASED ON SUBMITTER
 
-  document.getElementById("submitter").addEventListener("input", function () {
-    const name = this.value.trim().toLowerCase();
+document.getElementById("submitter").addEventListener("input", function () {
+  const name = this.value.trim().toLowerCase();
 
-    document.querySelectorAll(".classmate").forEach(card => {
-      const player = card.dataset.player.toLowerCase();
+  document.querySelectorAll(".classmate").forEach(card => {
+    const player = card.dataset.player.toLowerCase();
 
-      if (name === "") {
-        // No name entered → everything editable
-        card.style.opacity = "1";
-        card.querySelectorAll("input").forEach(input => {
-          if (!input.closest(".average-bar")) input.disabled = false;
-        });
-
-      } else if (player === name) {
-        // Always block your own stats
-        card.style.opacity = "0.4";
-        card.querySelectorAll("input").forEach(input => input.disabled = true);
-
-      } else if (name === "dylan") {
-        // Dylan can edit everyone except his own stats
-        card.style.opacity = "1";
-        card.querySelectorAll("input").forEach(input => {
-          if (!input.closest(".average-bar")) input.disabled = false;
-        });
-
-      } else if (player === "jeremy" || player === "kevin") {
-        // Any other submitter cannot edit Jeremy/Kevin
-        card.style.opacity = "0.4";
-        card.querySelectorAll("input").forEach(input => input.disabled = true);
-
-      } else {
-        // All other players editable
-        card.style.opacity = "1";
-        card.querySelectorAll("input").forEach(input => {
-          if (!input.closest(".average-bar")) input.disabled = false;
-        });
+    // RESET everything first
+    card.style.opacity = "1";
+    card.querySelectorAll("input").forEach(input => {
+      if (!input.closest(".average-bar")) {
+        input.disabled = false;
       }
     });
+
+    // Block your own stats
+    if (player === name) {
+      card.style.opacity = "0.4";
+      card.querySelectorAll("input").forEach(input => input.disabled = true);
+      return;
+    }
+
+    // If Dylan is submitting, allow everything except his own
+    if (name === "dylan") {
+      return;
+    }
+
+    // If someone else is submitting, block Jeremy & Kevin
+    if (player === "jeremy" || player === "kevin") {
+      card.style.opacity = "0.4";
+      card.querySelectorAll("input").forEach(input => input.disabled = true);
+    }
   });
+});
 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
 
