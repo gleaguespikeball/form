@@ -1,403 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>G League Evaluation Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
-  <link rel="icon" href="G_League.png" type="image/png">
-  <style>
-    body {
-      font-family: 'Sour Gummy', sans-serif;
-      background-color: #000;
-      color: #fff;
-      padding: 20px;
-      position: relative;
-    }
-    .logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #FFD700;
-      background-color: white;
-    }
-    .button-img {
-      position: absolute;
-      top: 40px;
-      right: 140px;
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 50%;
-      background-color: black;
-      border: 2px solid #FFD700;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .button-img:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 16px rgba(255, 215, 0, 0.4);
-    }
-    .classmate {
-      background-color: #1c1c1c;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-    }
-    h1 {
-    font-family: 'Changa One', sans-serif;
-    font-size: 64px;
-    margin-bottom: 35px;
-    color: #FFD700;
-    letter-spacing: 2px;
-    text-shadow: 0 0 12px rgba(255,215,0,0.6);
-    }
-    h2 {
-      margin-bottom: 12px;
-      color: #FFD700;
-      font-size: 28px;
-    }
-    .category {
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    }
-    label {
-    min-width: 170px;
-    font-weight: bold;
-    font-size: 18px;
-    }
-    input[type="range"] {
-    width: 100%;
-    margin-right: 10px;
-    -webkit-appearance: none;
-    background: white;
-    height: 10px;
-    border-radius: 5px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      background: #FFD700;
-      border: 2px solid white;
-      border-radius: 50%;
-      cursor: pointer;
-      transform: translateY(0px);
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      background: #FFD700;
-      border: 2px solid white;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    input[type="number"] {
-      background-color: black;
-      color: white;
-      border: 1px solid #FFD700;
-      border-radius: 5px;  
-      padding: 8px;
-      width: 60px;
-      box-sizing: border-box;
-      font-family: 'Sour Gummy', sans-serif;
-    }
-    input[type="text"] {
-      background-color: black;
-      color: white;
-      border: 1px solid #FFD700;
-      border-radius: 5px;
-      padding: 8px;
-      width: 250px;
-      box-sizing: border-box;
-      font-family: 'Sour Gummy', sans-serif;
-    }
-    input[type="text"]:focus, input[type="number"]:focus {
-      background-color: black;
-      color: white;
-      border: 1px solid #FFD700;
-      outline: none;
-    }
-    input[disabled] {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .average-bar input[type="range"] {
-      background: #e6c200;
-    }
-    .average-bar input[type="number"] {
-      width: 60px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      background-color: #FFD700;
-      color: black;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #e6c200;
-    }
-    .classmate[style*="opacity"] {
-      pointer-events: none;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>G League Evaluation Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
+
+<link rel="icon" href="G_League.png" type="image/png">
+
+<style>
+
+body {
+font-family:'Sour Gummy',sans-serif;
+background:#000;
+color:#fff;
+padding:20px;
+position:relative;
+}
+
+.logo{
+position:absolute;
+top:20px;
+right:20px;
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #FFD700;
+background:white;
+}
+
+.button-img{
+position:absolute;
+top:40px;
+right:140px;
+width:60px;
+height:60px;
+border-radius:50%;
+border:2px solid #FFD700;
+cursor:pointer;
+transition:0.3s;
+}
+
+.button-img:hover{
+transform:translateY(-5px) scale(1.1);
+box-shadow:0 8px 16px rgba(255,215,0,0.4);
+}
+
+.classmate{
+background:#1c1c1c;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(255,255,255,0.1);
+transition:opacity .2s;
+}
+
+.locked{
+opacity:.4;
+pointer-events:none;
+}
+
+h1{
+font-family:'Changa One',sans-serif;
+font-size:64px;
+margin-bottom:35px;
+color:#FFD700;
+letter-spacing:2px;
+text-shadow:0 0 12px rgba(255,215,0,0.6);
+}
+
+h2{
+margin-bottom:12px;
+color:#FFD700;
+font-size:28px;
+}
+
+.category{
+margin:15px 0;
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+label{
+min-width:170px;
+font-weight:bold;
+font-size:18px;
+}
+
+input[type="range"]{
+width:100%;
+-webkit-appearance:none;
+background:white;
+height:10px;
+border-radius:5px;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+-webkit-appearance:none;
+width:18px;
+height:18px;
+background:#FFD700;
+border:2px solid white;
+border-radius:50%;
+cursor:pointer;
+}
+
+input[type="number"]{
+background:black;
+color:white;
+border:1px solid #FFD700;
+border-radius:5px;
+padding:8px;
+width:60px;
+font-family:'Sour Gummy';
+}
+
+input[type="text"]{
+background:black;
+color:white;
+border:1px solid #FFD700;
+border-radius:5px;
+padding:8px;
+width:250px;
+font-family:'Sour Gummy';
+}
+
+input:focus{
+outline:none;
+}
+
+.average-bar input[type="range"]{
+background:#e6c200;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+border:none;
+border-radius:5px;
+background:#FFD700;
+color:black;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#e6c200;
+}
+
+</style>
 </head>
+
 <body>
 
-  <a href="https://www.instagram.com/gleague_spikeball/" target="_blank">
-    <img src="Instagram.png" alt="Button" class="button-img" />
-  </a>
-  <img src="G_League.png" alt="G League Logo" class="logo" />
+<a href="https://www.instagram.com/gleague_spikeball/" target="_blank">
+<img src="Instagram.png" class="button-img">
+</a>
 
-  <h1>G League Evaluation Form</h1>
+<img src="G_League.png" class="logo">
 
-  <form id="feedbackForm">
-    <div class="category">
-      <label for="submitter">Your Name</label>
-      <input type="text" id="submitter" name="submitter" required />
-    </div>
+<h1>G League Evaluation Form</h1>
 
-    <div id="formContent"></div>
+<form id="feedbackForm">
 
-    <button type="submit">Submit</button>
-  </form>
+<div class="category">
+<label>Your Name</label>
+<input type="text" id="submitter" required>
+</div>
 
-  <script>
+<div id="formContent"></div>
 
-  const classmates = [
-    "Dylan", "Kai", "Virup", "Anish", "Evan", "Aarav",
-    "Sean", "Andres", "Francisco", "Brandon", "Nikita", "Saul",
-    "Jeremy", "Kevin", "Mario", "Justin", "Cesar", "Ozan"
-  ];
+<button type="submit">Submit</button>
 
-  const categories = ["Power", "Hitting Accuracy", "Setting", "Defense", "Game IQ", "Hustle"];
+</form>
 
-  const formContent = document.getElementById("formContent");
+<script>
 
-  classmates.forEach((name, index) => {
+const classmates=[
+"Dylan","Kai","Virup","Anish","Evan","Aarav",
+"Sean","Andres","Francisco","Brandon","Nikita","Saul",
+"Jeremy","Kevin","Mario","Justin","Cesar","Ozan"
+];
 
-    const div = document.createElement("div");
-    div.className = "classmate";
-    div.setAttribute("data-player", name);
+const categories=[
+"Power","Hitting Accuracy","Setting","Defense","Game IQ","Hustle"
+];
 
-    div.innerHTML = `<h2>${name}</h2>`;
+const formContent=document.getElementById("formContent");
 
-    categories.forEach(category => {
+classmates.forEach((name,index)=>{
 
-      const id = `classmate${index}_${category.replace(/\s+/g, '')}`;
+const div=document.createElement("div");
+div.className="classmate";
+div.dataset.player=name;
 
-      div.innerHTML += `
-        <div class="category">
-          <label for="${id}">${category}</label>
+div.innerHTML=`<h2>${name}</h2>`;
 
-          <input
-            type="range"
-            id="${id}_slider"
-            min="50"
-            max="99"
-            value="50"
-            oninput="
-              document.getElementById('${id}_num').value = this.value;
-              updateAverage(${index});
-              updateSliderFill(this);
-            "
-          >
+categories.forEach(category=>{
 
-          <input
-            type="number"
-            id="${id}_num"
-            name="${name}_${category}"
-            min="50"
-            max="99"
-            value="50"
-            oninput="
-              if (this.value > 99) this.value = 99;
-              if (this.value < 50) this.value = 50;
-              const slider = document.getElementById('${id}_slider');
-              slider.value = this.value;
-              updateAverage(${index});
-              updateSliderFill(slider);
-            "
-          >
-        </div>
-      `;
-    });
+const id=`c${index}_${category.replace(/\s/g,"")}`;
 
-    const avgId = `classmate${index}_Average`;
+div.innerHTML+=`
 
-    div.innerHTML += `
-      <div class="category average-bar">
-        <label for="${avgId}_slider">Overall</label>
+<div class="category">
 
-        <input
-          type="range"
-          id="${avgId}_slider"
-          value="50"
-          min="50"
-          max="99"
-          disabled
-        >
+<label>${category}</label>
 
-        <input
-          type="number"
-          id="${avgId}_num"
-          value="50"
-          disabled
-        >
-      </div>
-    `;
+<input type="range"
+id="${id}_slider"
+min="50"
+max="99"
+value="50"
+oninput="
+document.getElementById('${id}_num').value=this.value;
+updateAverage(${index});
+updateSliderFill(this);
+">
 
-    formContent.appendChild(div);
+<input type="number"
+id="${id}_num"
+name="${name}_${category}"
+min="50"
+max="99"
+value="50"
+oninput="
+if(this.value>99)this.value=99;
+if(this.value<50)this.value=50;
+const s=document.getElementById('${id}_slider');
+s.value=this.value;
+updateAverage(${index});
+updateSliderFill(s);
+">
 
-  });
-
-  function updateAverage(index) {
-
-    let total = 0;
-
-    categories.forEach(category => {
-
-      const id = `classmate${index}_${category.replace(/\s+/g, '')}_num`;
-      const input = document.getElementById(id);
-
-      if (input) {
-        total += parseInt(input.value);
-      }
-
-    });
-
-    const avg = Math.ceil(total / categories.length);
-
-    const avgSlider = document.getElementById(`classmate${index}_Average_slider`);
-    const avgNum = document.getElementById(`classmate${index}_Average_num`);
-
-    avgSlider.value = avg;
-    avgNum.value = avg;
-
-    updateSliderFill(avgSlider);
-
-  }
-
-  function updateSliderFill(slider) {
-
-    const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-
-    slider.style.background =
-      "linear-gradient(to right, #FFD700 " + percent + "%, white " + percent + "%)";
-
-  }
-
-  document.querySelectorAll('input[type="range"]').forEach(slider => {
-
-    updateSliderFill(slider);
-
-    slider.addEventListener("input", () => {
-      updateSliderFill(slider);
-    });
-
-  });
-
-
-  // LOCK PLAYER STATS BASED ON SUBMITTER
-
-document.getElementById("submitter").addEventListener("input", function () {
-  const name = this.value.trim().toLowerCase();
-
-  document.querySelectorAll(".classmate").forEach(card => {
-    const player = card.dataset.player.toLowerCase();
-
-    // RESET everything first
-    card.style.opacity = "1";
-    card.querySelectorAll("input").forEach(input => {
-      if (!input.closest(".average-bar")) {
-        input.disabled = false;
-      }
-    });
-
-    // Block your own stats
-    if (player === name) {
-      card.style.opacity = "0.4";
-      card.querySelectorAll("input").forEach(input => input.disabled = true);
-      return;
-    }
-
-    // If Dylan is submitting, allow everything except his own
-    if (name === "dylan") {
-      return;
-    }
-
-    // If someone else is submitting, block Jeremy & Kevin
-    if (player === "jeremy" || player === "kevin") {
-      card.style.opacity = "0.4";
-      card.querySelectorAll("input").forEach(input => input.disabled = true);
-    }
-  });
+</div>
+`;
 });
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
+div.innerHTML+=`
 
-  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+<div class="category average-bar">
 
-    const submitter = document.getElementById("submitter").value;
-    let players = [];
+<label>Overall</label>
 
-    classmates.forEach((name, index) => {
+<input type="range"
+id="avg${index}_slider"
+min="50"
+max="99"
+value="50"
+disabled>
 
-      const lname = name.toLowerCase();
+<input type="number"
+id="avg${index}_num"
+value="50"
+disabled>
 
-      // Skip your own stats AND skip Jeremy & Kevin unless you're Dylan
-      if (lname === submitter) return;
-      if (submitter !== "dylan" && (lname === "jeremy" || lname === "kevin")) return;
+</div>
+`;
 
-      const power = document.querySelector(`[name="${name}_Power"]`).value;
-      const accuracy = document.querySelector(`[name="${name}_Hitting Accuracy"]`).value;
-      const setting = document.querySelector(`[name="${name}_Setting"]`).value;
-      const defense = document.querySelector(`[name="${name}_Defense"]`).value;
-      const iq = document.querySelector(`[name="${name}_Game IQ"]`).value;
-      const hustle = document.querySelector(`[name="${name}_Hustle"]`).value;
-      const overall = document.getElementById(`classmate${index}_Average_num`).value;
+formContent.appendChild(div);
 
-      players.push({
-        name,
-        power,
-        accuracy,
-        setting,
-        defense,
-        iq,
-        hustle,
-        overall
-      });
+});
 
-    });
+function updateAverage(index){
 
-    document.querySelector("button[type='submit']").disabled = true;
-    document.querySelector("button[type='submit']").innerText = "Submitting...";
+let total=0;
 
-    fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify({
-        submitter,
-        players
-      })
-    });
+categories.forEach(cat=>{
+const v=document.querySelector(`#c${index}_${cat.replace(/\s/g,"")}_num`).value;
+total+=parseInt(v);
+});
 
-    window.location.href = "thankyou.html";
+const avg=Math.ceil(total/categories.length);
 
-  });
+document.getElementById(`avg${index}_slider`).value=avg;
+document.getElementById(`avg${index}_num`).value=avg;
 
-  </script>
+updateSliderFill(document.getElementById(`avg${index}_slider`));
+
+}
+
+function updateSliderFill(slider){
+
+const percent=((slider.value-slider.min)/(slider.max-slider.min))*100;
+
+slider.style.background=
+`linear-gradient(to right,#FFD700 ${percent}%,white ${percent}%)`;
+
+}
+
+document.querySelectorAll('input[type="range"]').forEach(s=>{
+updateSliderFill(s);
+s.addEventListener("input",()=>updateSliderFill(s));
+});
+
+
+/* LOCKING LOGIC */
+
+document.getElementById("submitter").addEventListener("input",function(){
+
+const name=this.value.trim().toLowerCase();
+
+document.querySelectorAll(".classmate").forEach(card=>{
+
+const player=card.dataset.player.toLowerCase();
+
+card.classList.remove("locked");
+
+if(name==="") return;
+
+/* block own stats */
+
+if(player===name){
+card.classList.add("locked");
+return;
+}
+
+/* Dylan can edit everyone except himself */
+
+if(name==="dylan") return;
+
+/* others cannot edit Jeremy or Kevin */
+
+if(player==="jeremy"||player==="kevin"){
+card.classList.add("locked");
+}
+
+});
+
+});
+
+
+const scriptURL="https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
+
+document.getElementById("feedbackForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const submitter=document.getElementById("submitter").value.trim().toLowerCase();
+
+let players=[];
+
+classmates.forEach((name,index)=>{
+
+const lname=name.toLowerCase();
+
+/* skip own stats */
+
+if(lname===submitter) return;
+
+/* skip jeremy kevin unless dylan */
+
+if(submitter!=="dylan"&&(lname==="jeremy"||lname==="kevin")) return;
+
+const power=document.querySelector(`[name="${name}_Power"]`).value;
+const accuracy=document.querySelector(`[name="${name}_Hitting Accuracy"]`).value;
+const setting=document.querySelector(`[name="${name}_Setting"]`).value;
+const defense=document.querySelector(`[name="${name}_Defense"]`).value;
+const iq=document.querySelector(`[name="${name}_Game IQ"]`).value;
+const hustle=document.querySelector(`[name="${name}_Hustle"]`).value;
+
+const overall=document.getElementById(`avg${index}_num`).value;
+
+players.push({
+name,
+power,
+accuracy,
+setting,
+defense,
+iq,
+hustle,
+overall
+});
+
+});
+
+document.querySelector("button").disabled=true;
+document.querySelector("button").innerText="Submitting...";
+
+fetch(scriptURL,{
+method:"POST",
+body:JSON.stringify({submitter,players})
+});
+
+window.location.href="thankyou.html";
+
+});
+
+</script>
+
 </body>
 </html>
