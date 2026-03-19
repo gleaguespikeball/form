@@ -390,6 +390,42 @@ window.location.href="thankyou.html";
 
 });
 
+function saveData() {
+  const data = {};
+
+  document.querySelectorAll("input").forEach(input => {
+    if (input.id) {
+      data[input.id] = input.value;
+    }
+  });
+
+  localStorage.setItem("gleagueFormData", JSON.stringify(data));
+}
+
+function loadData() {
+  const saved = JSON.parse(localStorage.getItem("gleagueFormData"));
+
+  if (!saved) return;
+
+  Object.keys(saved).forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+      input.value = saved[id];
+
+      // also update slider fill if it's a slider
+      if (input.type === "range") {
+        updateSliderFill(input);
+      }
+    }
+  });
+}
+
+loadData();
+
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("input", saveData);
+});
+
 </script>
 
 </body>
