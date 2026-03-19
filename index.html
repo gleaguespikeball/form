@@ -30,6 +30,13 @@ border-radius:50%;
 object-fit:cover;
 border:2px solid #FFD700;
 background:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.logo:hover{
+transform:translateY(-5px) scale(1.1);
+box-shadow:0 8px 16px rgba(255,215,0,0.4);
 }
 
 .button-img{
@@ -161,7 +168,10 @@ background:#e6c200;
 <img src="Instagram.png" class="button-img">
 </a>
 
+<!-- ✅ CLICKABLE LOGO -->
+<a href="https://osahin67.github.io/spikeball-site/" target="_blank">
 <img src="G_League.png" class="logo">
+</a>
 
 <h1>G League Evaluation Form</h1>
 
@@ -276,20 +286,18 @@ total+=parseInt(v);
 
 const avg=Math.ceil(total/categories.length);
 
-document.getElementById(`avg${index}_slider`).value=avg;
-document.getElementById(`avg${index}_num`).value=avg;
+const avgSlider=document.getElementById(`avg${index}_slider`);
+const avgNum=document.getElementById(`avg${index}_num`);
 
-updateSliderFill(document.getElementById(`avg${index}_slider`));
+avgSlider.value=avg;
+avgNum.value=avg;
 
+updateSliderFill(avgSlider);
 }
 
 function updateSliderFill(slider){
-
 const percent=((slider.value-slider.min)/(slider.max-slider.min))*100;
-
-slider.style.background=
-`linear-gradient(to right,#FFD700 ${percent}%,white ${percent}%)`;
-
+slider.style.background=`linear-gradient(to right,#FFD700 ${percent}%,white ${percent}%)`;
 }
 
 document.querySelectorAll('input[type="range"]').forEach(s=>{
@@ -298,11 +306,10 @@ s.addEventListener("input",()=>updateSliderFill(s));
 });
 
 
-/* LOCKING LOGIC */
+// ✅ LOCK FUNCTION (FIXED)
+function applyLocks(){
 
-document.getElementById("submitter").addEventListener("input",function(){
-
-const name=this.value.trim().toLowerCase();
+const name=document.getElementById("submitter").value.trim().toLowerCase();
 
 document.querySelectorAll(".classmate").forEach(card=>{
 
@@ -312,28 +319,25 @@ card.classList.remove("locked");
 
 if(name==="") return;
 
-/* block own stats */
-
 if(player===name){
 card.classList.add("locked");
 return;
 }
 
-/* Dylan can edit everyone except himself */
-
 if(name==="dylan") return;
-
-/* others cannot edit Jeremy or Kevin */
 
 if(player==="jeremy"||player==="kevin"){
 card.classList.add("locked");
 }
 
 });
+}
 
-});
+// ✅ EVENT LISTENER
+document.getElementById("submitter").addEventListener("input",applyLocks);
 
 
+// SUBMIT (UNCHANGED)
 const scriptURL="https://script.google.com/macros/s/AKfycbxjDLC5iGIJVE1leQHQD-7ln8vqWpKk2J3NH8Ne8sTDx8VJEbDqpWaRhWVg4LNGkKV2/exec";
 
 document.getElementById("feedbackForm").addEventListener("submit",function(e){
@@ -348,11 +352,7 @@ classmates.forEach((name,index)=>{
 
 const lname=name.toLowerCase();
 
-/* skip own stats */
-
 if(lname===submitter) return;
-
-/* skip jeremy kevin unless dylan */
 
 if(submitter!=="dylan"&&(lname==="jeremy"||lname==="kevin")) return;
 
@@ -365,16 +365,7 @@ const hustle=document.querySelector(`[name="${name}_Hustle"]`).value;
 
 const overall=document.getElementById(`avg${index}_num`).value;
 
-players.push({
-name,
-power,
-accuracy,
-setting,
-defense,
-iq,
-hustle,
-overall
-});
+players.push({name,power,accuracy,setting,defense,iq,hustle,overall});
 
 });
 
@@ -390,40 +381,34 @@ window.location.href="thankyou.html";
 
 });
 
-function saveData() {
-  const data = {};
 
-  document.querySelectorAll("input").forEach(input => {
-    if (input.id) {
-      data[input.id] = input.value;
-    }
-  });
-
-  localStorage.setItem("gleagueFormData", JSON.stringify(data));
+// SAVE / LOAD
+function saveData(){
+const data={};
+document.querySelectorAll("input").forEach(i=>{
+if(i.id)data[i.id]=i.value;
+});
+localStorage.setItem("gleagueFormData",JSON.stringify(data));
 }
 
-function loadData() {
-  const saved = JSON.parse(localStorage.getItem("gleagueFormData"));
+function loadData(){
+const saved=JSON.parse(localStorage.getItem("gleagueFormData"));
+if(!saved)return;
 
-  if (!saved) return;
-
-  Object.keys(saved).forEach(id => {
-    const input = document.getElementById(id);
-    if (input) {
-      input.value = saved[id];
-
-      // also update slider fill if it's a slider
-      if (input.type === "range") {
-        updateSliderFill(input);
-      }
-    }
-  });
+Object.keys(saved).forEach(id=>{
+const input=document.getElementById(id);
+if(input){
+input.value=saved[id];
+if(input.type==="range")updateSliderFill(input);
+}
+});
 }
 
 loadData();
+applyLocks(); // ✅ CRITICAL FIX
 
-document.querySelectorAll("input").forEach(input => {
-  input.addEventListener("input", saveData);
+document.querySelectorAll("input").forEach(i=>{
+i.addEventListener("input",saveData);
 });
 
 </script>
